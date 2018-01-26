@@ -11,7 +11,6 @@ const verifyJWT = token => {
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handle = app.getRequestHandler()
 
 const isLoggedIn = async (req, res, next) => {
   try {
@@ -60,7 +59,7 @@ app.prepare()
   })
 
   server.get('*', (req, res) => {
-    return handle(req, res)
+    app.render(req, res)
   })
 
   server.listen(3000, (err) => {
